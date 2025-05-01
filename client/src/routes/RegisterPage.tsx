@@ -14,22 +14,44 @@ export default function RegisterPage() {
   };
 
   return (
-    <main>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-        </label>
-        <label>
-          Password
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
+    <main className="flex items-center justify-center min-h-screen bg-black text-mustard-yellow">
+      <div className="w-full max-w-md p-8 bg-black border border-mustard-yellow rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <label className="block">
+            <span className="block mb-1 text-sm font-medium">Email</span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2 text-black bg-mustard-yellow border border-black rounded focus:outline-none focus:ring-2 focus:ring-black"
+            />
+          </label>
+          <label className="block">
+            <span className="block mb-1 text-sm font-medium">Password</span>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-2 text-black bg-mustard-yellow border border-black rounded focus:outline-none focus:ring-2 focus:ring-black"
+            />
+          </label>
+          <button
+            type="submit"
+            className="w-full px-4 py-2 font-bold text-black bg-mustard-yellow border border-black rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-black"
+          >
+            Sign Up
+          </button>
+        </form>
+        <p className="mt-4 text-center">
+          Already have an account?{' '}
+          <Link to="/login" className="font-bold text-mustard-yellow hover:underline">
+            Login here
+          </Link>
+        </p>
+      </div>
     </main>
   );
 }
