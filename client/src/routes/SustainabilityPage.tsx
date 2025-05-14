@@ -20,10 +20,10 @@ export default function SustainabilityPage() {
     <main className="h-screen bg-gradient-to-br from-black via-gray-900 to-black text-mustard-yellow p-8">
       <h2 className="text-5xl font-extrabold mb-10 text-center">Sustainability</h2>
       <div className="flex flex-row flex-wrap justify-center gap-8">
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Article: "5 Easy Ways to Reduce Plastic Waste"</h3>
           <img
-            src="/assets/react.svg"
+            src="/assets/reduce-plastic.svg"
             alt="Reduce Plastic Waste"
             className="mb-4 rounded-lg shadow-md"
           />
@@ -47,10 +47,10 @@ export default function SustainabilityPage() {
             </div>
           )}
         </section>
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Article: "The Future of Sustainable Fashion"</h3>
           <img
-            src="/assets/react.svg"
+            src="/assets/sustainable-fashion.svg"
             alt="Sustainable Fashion"
             className="mb-4 rounded-lg shadow-md"
           />

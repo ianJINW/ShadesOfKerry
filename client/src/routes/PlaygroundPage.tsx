@@ -20,10 +20,10 @@ export default function PlaygroundPage() {
     <main className="h-screen bg-gradient-to-br from-black via-gray-900 to-black text-mustard-yellow p-8">
       <h2 className="text-5xl font-extrabold mb-10 text-center">Kerry's Playground</h2>
       <div className="flex flex-row flex-wrap justify-center gap-8">
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Poetry: "The Golden Hour"</h3>
           <img
-            src="/assets/react.svg"
+            src="/assets/golden-hour.svg"
             alt="Golden Hour"
             className="mb-4 rounded-lg shadow-md"
           />
@@ -50,10 +50,10 @@ export default function PlaygroundPage() {
             </div>
           )}
         </section>
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Daily Rant: "Why Mondays Are the Worst"</h3>
           <img
-            src="/assets/react.svg"
+            src="/assets/mondays.svg"
             alt="Mondays"
             className="mb-4 rounded-lg shadow-md"
           />
