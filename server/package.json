@@ -1,7 +1,7 @@
 {
-	"name": "art-home",
+	"name": "shades-of-kerry",
 	"version": "1.0.0",
-	"description": "A home for your art, a place for your heart",
+	"description": "Meet Kerry, a model trainer and influencer who is passionate about fashion, beauty, and lifestyle. She is a rising star in the industry, known for her stunning looks and unique sense of style. Kerry has a large following on social media, where she shares her fashion tips, beauty secrets, and personal experiences with her fans. She is also an advocate for body positivity and self-love, encouraging her followers to embrace their individuality and celebrate their unique beauty.",
 	"keywords": [
 		"ShadesOfKerry",
 		"Njenga",
@@ -20,11 +20,11 @@
 	"license": "MIT",
 	"author": "Njenga Ian Josh",
 	"type": "commonjs",
-	"main": "index.ts",
+	"main": "index.js",
 	"scripts": {
-		"start": "nodemon",
-		"test": "jest",
-		"dev": "nodemon"
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"test": "jest"
 	},
 	"dependencies": {
 		"bcryptjs": "^3.0.2",
@@ -56,13 +56,13 @@
 		"@types/mongoose": "^5.11.96",
 		"@types/morgan": "^1.9.9",
 		"@types/multer": "^1.4.12",
-		"@types/node": "^22.13.10",
+		"@types/node": "^22.15.17",
 		"@types/passport": "^1.0.17",
 		"@types/passport-jwt": "^4.0.1",
 		"@types/validator": "^13.15.0",
 		"dotenv": "^16.4.7",
-		"nodemon": "^3.1.9",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.8.2"
+		"nodemon": "^3.1.10",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.0"
 	}
 }
