@@ -18,7 +18,7 @@ export default function App() {
   const isDark = useAuthStore((state) => state.isDark);
 
   return (
-    <div className={`${isDark ? 'dark' : ''} bg-gradient-to-br from-gray-800 via-gray-900 to-black text-mustard-yellow`}>
+    <div className={`${isDark ? 'dark' : ''} bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)]`}>
       <BrowserRouter>
         <Navbar />
         <Routes>

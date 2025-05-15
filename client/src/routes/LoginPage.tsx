@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signInWithGooglePopup } from '../config/firebase';
 import { Unlock } from 'lucide-react';
-import useAuthStore from '../store/auth.store';
+import useAuthStore, { User } from '../store/auth.store';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -30,15 +30,13 @@ export default function LoginPage() {
     }
   };
 
-  const handleClick = async () => {
+  const handleGoogleSignIn = async () => {
     setLoading(true);
     setError(null);
 
     try {
       const result = await signInWithGooglePopup();
-      const user = { id: 1, username: result.displayName, email: result.email }; // Replace with actual user data
-      const token = "google_token"; // Replace with actual token
-      login(user, token);
+      console.log('User signed in:', result);
       nav('/rooms');
     } catch (_) {
       setError(`Error signing in with Google. Please try again. ${_}`);
@@ -48,9 +46,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-black via-gray-900 to-black text-mustard-yellow">
-      <div className="w-full max-w-lg p-10 bg-gray-800 border border-mustard-yellow rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)]">
+      <div className="w-full max-w-lg p-10 bg-[var(--card-bg-light)] dark:bg-[var(--card-bg-dark)] rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
         {error && <p className="mb-4 text-center text-red-500">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-5">
           <label className="block">
@@ -75,23 +73,22 @@ export default function LoginPage() {
           </label>
           <button
             type="submit"
-            disabled={loading}
-            className={`w-full px-4 py-2 font-bold text-black bg-yellow-400 border border-gray-600 rounded hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className="w-full px-4 py-2 font-bold text-black bg-yellow-400 border border-gray-600 rounded hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
-            {loading ? 'Logging in...' : 'Log In'}
+            Sign Up
           </button>
         </form>
         <p className="mt-4 text-center">
-          Don't have an account?{' '}
-          <Link to="/register" className="font-bold text-yellow-400 hover:underline">
-            Register here
+          Already have an account?{' '}
+          <Link to="/login" className="font-bold text-[var(--mustard-yellow)] hover:underline">
+            Login here
           </Link>
         </p>
       </div>
       <button
-        onClick={handleClick}
+        onClick={handleGoogleSignIn}
         disabled={loading}
-        className={`mt-6 w-full max-w-lg px-4 py-2 font-bold text-black bg-mustard-yellow border border-gray-600 rounded hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`mt-6 w-full max-w-lg button button-primary ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         <Unlock className="inline-block mr-2" size={20} />
         {loading ? 'Signing in...' : 'Sign in with Google'}

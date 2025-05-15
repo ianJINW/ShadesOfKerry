@@ -1,7 +1,9 @@
+import { useState } from "react";
 import useAuthStore from "../store/auth.store";
 
 export default function PlaygroundPage() {
   const { token } = useAuthStore();
+  const [isFormVisible, setFormVisible] = useState(false);
 
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,11 +18,15 @@ export default function PlaygroundPage() {
     // Logic for updating a piece
   };
 
+  const toggleFormVisibility = () => {
+    setFormVisible(!isFormVisible);
+  };
+
   return (
-    <main className="h-screen bg-gradient-to-br from-black via-gray-900 to-black text-mustard-yellow p-8">
+    <main className="min-h-screen bg-[var(--bg-light)] dark:bg-gradient-to-br dark:from-black dark:via-gray-900 dark:to-black text-mustard-yellow p-8">
       <h2 className="text-5xl font-extrabold mb-10 text-center">Kerry's Playground</h2>
       <div className="flex flex-row flex-wrap justify-center gap-8">
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
+        <section className="card max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Poetry: "The Golden Hour"</h3>
           <img
             src="/assets/golden-hour.svg"
@@ -50,7 +56,7 @@ export default function PlaygroundPage() {
             </div>
           )}
         </section>
-        <section className="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform max-w-[56vw] flex-shrink-0">
+        <section className="card max-w-[56vw] flex-shrink-0">
           <h3 className="text-3xl font-bold mb-4">Daily Rant: "Why Mondays Are the Worst"</h3>
           <img
             src="/assets/mondays.svg"
@@ -80,33 +86,43 @@ export default function PlaygroundPage() {
         </section>
       </div>
       {token && (
-        <form onSubmit={handleCreate} className="mt-10 bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h3 className="text-3xl font-bold mb-4">Create New Piece</h3>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2">Title</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white"
-              placeholder="Enter title"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2">Content</label>
-            <textarea
-              className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white"
-              placeholder="Enter content"
-              rows={4}
-              required
-            ></textarea>
-          </div>
+        <div className="mt-10 flex flex-col items-center">
           <button
-            type="submit"
-            className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+            onClick={toggleFormVisibility}
+            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
-            Create
+            {isFormVisible ? "Hide Form" : "Create New Piece"}
           </button>
-        </form>
+          {isFormVisible && (
+            <form onSubmit={handleCreate} className="mt-6 w-full max-w-lg bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 className="text-3xl font-bold mb-4 text-center">Create New Piece</h3>
+              <div className="mb-4">
+                <label className="block text-lg font-medium mb-2">Title</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white"
+                  placeholder="Enter title"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-medium mb-2">Content</label>
+                <textarea
+                  className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white"
+                  placeholder="Enter content"
+                  rows={4}
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                Create
+              </button>
+            </form>
+          )}
+        </div>
       )}
     </main>
   );

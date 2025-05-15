@@ -1,62 +1,73 @@
 @import "tailwindcss";
 
-/* Custom Variants */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Base Styles */
 :root {
-	--mustard-yellow: #facc15;
-	--dark-gray: #1f2937;
-	--light-gray: #f3f4f6;
+	--mustard-yellow: #ffdb58; /* Primary buttons or key highlights */
+	--dark-teal: #005f5f; /* Hover states, links, or icons */
+	--navy: #002f6c; /* Text, borders, and structured elements */
+	--charcoal: #333333; /* Text, borders, and structured elements */
+	--bg-light: #f5f5f5; /* Light mode background */
+	--bg-dark: #121212; /* Neutral dark background */
+	--card-bg-light: #ede0cb; /* Light beige for cards */
+	--card-bg-dark: #1e293b; /* Dark gray for cards */
+	--hover-light: #005f5f; /* Dark teal for hover in light mode */
+	--hover-dark: #374151; /* Subtle hover for dark mode */
+	--text-light: #002f6c; /* Navy for light mode text */
+	--text-dark: #e2e8f0; /* Neutral light text */
+	--dusty-lavender: #b39eb5; /* Notification badges, micro-interactions */
 }
 
-/* Utility Classes */
-.bg-dark {
-	@apply bg-black;
+body {
+	@apply bg-[var(--bg-light)] text-[var(--text-light)] font-sans;
 }
 
-.text-mustard-yellow {
-	@apply text-[var(--mustard-yellow)];
+.dark body {
+	@apply bg-[var(--bg-dark)] text-[var(--text-dark)];
 }
 
-.border-mustard-yellow {
-	@apply border-[var(--mustard-yellow)];
+.card {
+	@apply rounded-lg shadow-md p-6 transition-all duration-300;
+	background-color: var(--card-bg-light);
 }
 
-.bg-mustard-yellow {
-	@apply bg-[var(--mustard-yellow)];
+.dark .card {
+	background-color: var(--card-bg-dark);
 }
 
-.dark-mode {
-	@apply dark:bg-gray-800;
-}
-
-/* Navbar Styles */
 .navbar {
-	@apply flex items-center justify-between px-8 py-4 bg-[var(--light-gray)] shadow-lg;
-}
-
-.navbar a {
-	@apply text-[var(--dark-gray)] font-semibold hover:text-[var(--mustard-yellow)] transition-colors duration-300;
-}
-
-.navbar ul {
-	@apply flex space-x-8;
+	@apply flex items-center justify-between px-8 py-4 shadow-md transition-all duration-300;
+	background-color: var(--bg-light);
 }
 
 .dark .navbar {
-	@apply bg-[var(--dark-gray)];
+	background-color: var(--bg-dark);
+}
+
+.navbar a {
+	@apply text-[var(--text-light)] font-semibold hover:text-[var(--mustard-yellow)] transition-colors duration-300;
 }
 
 .dark .navbar a {
-	@apply text-[var(--light-gray)] hover:text-[var(--mustard-yellow)];
+	@apply text-[var(--text-dark)] hover:text-[var(--mustard-yellow)];
 }
 
-@media (max-width: 768px) {
-	.navbar {
-		@apply flex-col items-start space-y-4;
-	}
-	.navbar ul {
-		@apply flex-col space-y-4;
-	}
+.button {
+	@apply px-4 py-2 font-bold rounded-lg transition-all duration-300;
+}
+
+.button-primary {
+	@apply bg-[var(--mustard-yellow)] text-black hover:bg-yellow-500;
+}
+
+.button-secondary {
+	@apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.button-danger {
+	@apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.input {
+	@apply w-full px-4 py-2 rounded-lg bg-[var(--bg-light)] text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 outline-[var(--hover-light)] border-2 border-[var(--bg-light)];
 }
