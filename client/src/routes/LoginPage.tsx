@@ -36,7 +36,14 @@ export default function LoginPage() {
 
     try {
       const result = await signInWithGooglePopup();
-      console.log('User signed in:', result);
+
+      const user: User = result ? {
+        id: 1,
+        username: result.user.displayName || 'Google User',
+        email: result.user.email || '',
+      } : { id: 0, username: '', email: '' };
+      const token = "google_token";
+      login(user, token);
       nav('/rooms');
     } catch (_) {
       setError(`Error signing in with Google. Please try again. ${_}`);
@@ -48,7 +55,7 @@ export default function LoginPage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)]">
       <div className="w-full max-w-lg p-10 bg-[var(--card-bg-light)] dark:bg-[var(--card-bg-dark)] rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
         {error && <p className="mb-4 text-center text-red-500">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-5">
           <label className="block">
@@ -75,13 +82,13 @@ export default function LoginPage() {
             type="submit"
             className="w-full px-4 py-2 font-bold text-black bg-yellow-400 border border-gray-600 rounded hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
-            Sign Up
+            Log In
           </button>
         </form>
         <p className="mt-4 text-center">
-          Already have an account?{' '}
-          <Link to="/login" className="font-bold text-[var(--mustard-yellow)] hover:underline">
-            Login here
+          Don't have an account?{' '}
+          <Link to="/register" className="font-bold text-[var(--mustard-yellow)] hover:underline">
+            Register here
           </Link>
         </p>
       </div>
