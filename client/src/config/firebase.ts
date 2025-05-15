@@ -28,13 +28,31 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
 	prompt: "select_account",
 });
+auth.useDeviceLanguage();
+
+// Set up the authentication state observer
+auth.onAuthStateChanged((user) => {
+	if (user) {
+		console.log("User is signed in:", user);
+	} else {
+		console.log("No user is signed in.");
+	}
+});
 
 // Functions for Authentication
 export const signInWithGooglePopup = async () => {
 	try {
 		const result = await signInWithPopup(auth, provider);
+		const credential = GoogleAuthProvider.credentialFromResult(result);
+		const token = credential?.accessToken;
+		const user = result.user;
+
+		if (!user) {
+			throw new Error("User not found");
+		}
+
 		console.log("User signed in:", result.user);
-		return result.user;
+		return { user, token };
 	} catch (error) {
 		console.error("Error during sign-in with popup:", error);
 		if (error instanceof Error) {
@@ -49,23 +67,19 @@ export const signInWithGooglePopup = async () => {
 export const signInWithGoogleRedirect = async () => {
 	try {
 		await signInWithRedirect(auth, provider);
+
+		const result = await getRedirectResult(auth);
+		if (!result) throw new Error("No result from redirect");
+		if (!result.user) throw new Error("User not found in redirect result");
+
+		const credential = GoogleAuthProvider.credentialFromResult(result);
+		const token = credential?.accessToken;
+		const user = result.user;
+
+		console.log("User signed in via redirect:", user);
+		return { user, token };
 	} catch (error) {
 		console.error("Error during sign-in with redirect:", error);
-		throw error;
-	}
-};
-
-export const handleRedirectResult = async () => {
-	try {
-		const result = await getRedirectResult(auth);
-		if (result) {
-			console.log("User signed in via redirect:", result.user);
-			return result.user;
-		} else {
-			console.log("No user signed in via redirect");
-		}
-	} catch (error) {
-		console.error("Error during redirect result handling:", error);
 		throw error;
 	}
 };
@@ -80,5 +94,4 @@ export const logout = async () => {
 	}
 };
 
-// Export Auth and Provider
 export { auth, provider };
