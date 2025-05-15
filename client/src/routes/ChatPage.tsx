@@ -24,9 +24,9 @@ export default function ChatPage() {
   };
 
   return (
-    <main className="h-screen bg-gradient-to-br from-black via-gray-900 to-black text-mustard-yellow p-8">
-      <h2 className="text-4xl font-bold mb-6">Room: {roomId}</h2>
-      <div className="border border-mustard-yellow rounded-lg p-4 h-72 overflow-y-scroll mb-8 bg-gray-700">
+    <main className="min-h-screen bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)] p-8">
+      <h2 className="text-4xl font-bold mb-6 text-center">Room: {roomId}</h2>
+      <div className="border border-[var(--mustard-yellow)] rounded-lg p-4 h-72 overflow-y-scroll mb-8 bg-[var(--card-bg-light)] dark:bg-[var(--card-bg-dark)]">
         {messages.map((m, i) => (
           <div key={i} className="mb-2 text-sm">
             {m}
@@ -39,11 +39,11 @@ export default function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-          className="flex-1 px-4 py-3 text-black bg-mustard-yellow border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          className="input"
         />
         <button
           onClick={sendMessage}
-          className="px-5 py-3 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-500"
+          className="button button-primary"
         >
           Send
         </button>
